@@ -1,0 +1,27 @@
+{
+  "project_name": "{{ cookiecutter.project_name }}",
+  "folder_name": "{{ cookiecutter.project_name|lower|replace(' ','-') }}",
+  "repo_url": "{{ cookiecutter.repo_url }}",
+  "package_name": "{{ cookiecutter.project_name|lower|replace(' ','_')|replace('-','_') }}",
+  "docker_image_name": "{{ cookiecutter.project_name|lower|replace(' ','_') }}",
+  "script_name": "{{ cookiecutter.project_name|lower|replace(' ','_') }}",
+  "author": "{{ cookiecutter.author }}",
+  "email": "{{ cookiecutter.email }}",
+  "project_description": "This project was generated with cookiecutter-pypackage.",
+  "version": "0.1.0",
+  "github_actions": ["yes", "no"],
+  "codecov": ["yes", "no"],
+  "license": [
+        "MIT",
+        "BSD2",
+        "BSD3",
+        "ISC",
+        "Apache2.0",
+        "LGPLv3+",
+        "LGPLv3",
+        "LGPLv2+",
+        "LGPLv2",
+        "no"
+  ],
+  "year": "{{ cookiecutter.year }}"
+}
