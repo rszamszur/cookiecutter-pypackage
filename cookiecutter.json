@@ -1,12 +1,12 @@
 {
-  "project_name": "{{ cookiecutter.project_name }}",
+  "project_name": "Awesome Project",
   "folder_name": "{{ cookiecutter.project_name|lower|replace(' ','-') }}",
-  "repo_url": "{{ cookiecutter.repo_url }}",
+  "repo_url": "https://github.com/rszamszur/cookiecutter-pypackage",
   "package_name": "{{ cookiecutter.project_name|lower|replace(' ','_')|replace('-','_') }}",
   "docker_image_name": "{{ cookiecutter.project_name|lower|replace(' ','_') }}",
   "script_name": "{{ cookiecutter.project_name|lower|replace(' ','_') }}",
-  "author": "{{ cookiecutter.author }}",
-  "email": "{{ cookiecutter.email }}",
+  "author": "John Doe",
+  "email": "example@email.com",
   "project_description": "This project was generated with cookiecutter-pypackage.",
   "version": "0.1.0",
   "github_actions": ["yes", "no"],
@@ -23,5 +23,5 @@
         "LGPLv2",
         "no"
   ],
-  "year": "{{ cookiecutter.year }}"
+  "year": "2022"
 }
