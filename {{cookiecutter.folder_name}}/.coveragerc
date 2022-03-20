@@ -1,0 +1,3 @@
+[run]
+omit =
+    {{cookiecutter.package_name}}/__main__.py
