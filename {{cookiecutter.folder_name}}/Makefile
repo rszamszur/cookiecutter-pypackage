@@ -38,6 +38,10 @@ unit-test: install ## Run {{cookiecutter.project_name}} unit tests
 integration-test: install ## Run {{cookiecutter.project_name}} integration tests
 	@build/integration-test.sh
 
+.PHONY: docs
+docs: install ## Build {{cookiecutter.project_name}} documentation
+	@build/docs.sh
+
 .PHONY: show-version
 show-version:
 	echo -n $(TAG)
