@@ -28,5 +28,18 @@ def set_gh_actions():
         remove([".github"])
 
 
+def set_nix():
+    """Remove Nix expression files if not enabled."""
+    if "{{ cookiecutter.nix }}" != "yes":
+        remove(
+            [
+                "shell.nix",
+                "image.nix",
+                "default.nix",
+            ]
+        )
+
+
 if __name__ == "__main__":
     set_gh_actions()
+    set_nix()
