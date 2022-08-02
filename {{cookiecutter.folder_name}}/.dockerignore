@@ -14,8 +14,5 @@ __pycache__/
 .installed.cfg
 *.egg
 .cache
-flake8_code_errors.txt
-pep257_violations.txt
-pep8_violations.txt
-code_complexity.txt
 xunit-*.xml
+site/

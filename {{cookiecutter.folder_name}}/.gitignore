@@ -17,18 +17,17 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
-flake8_code_errors.txt
-pep257_violations.txt
-pep8_violations.txt
-code_complexity.txt
 xunit-*.xml
 
 # PyCharm
 .idea
 
-# virtual
+# virtualenv
 venv
 .venv
 
 # direnv
 .direnv
+
+# Sphinx docs
+site/
