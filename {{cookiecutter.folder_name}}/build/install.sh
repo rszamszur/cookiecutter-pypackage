@@ -1,5 +1,4 @@
-{%- raw %}
-#!/usr/bin/env bash
+{%- raw %}#!/usr/bin/env bash
 
 if [ -n "$DEBUG" ]; then
 	set -x
@@ -9,8 +8,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DIR=$(cd $(dirname "${BASH_SOURCE}") && pwd -P)
-
+PYTHON="${PYTHON:=NOT_SET}"
 if command -v python3 &> /dev/null; then
   PYTHON=python3
 elif command -v python &> /dev/null; then

@@ -8,8 +8,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DIR=$(cd $(dirname "${BASH_SOURCE}") && pwd -P)
-
 POETRY_HOME="${POETRY_HOME:=${HOME}/.poetry}"
 echo "[metrics] Run {{cookiecutter.project_name}} PEP 8 checks."
 "$POETRY_HOME"/bin/poetry run flake8 --select=E,W,I --max-line-length 80 --import-order-style pep8 --exclude .git,__pycache__,.eggs,*.egg,.pytest_cache,{{cookiecutter.package_name}}/version.py,{{cookiecutter.package_name}}/__init__.py --statistics --count {{cookiecutter.package_name}}
