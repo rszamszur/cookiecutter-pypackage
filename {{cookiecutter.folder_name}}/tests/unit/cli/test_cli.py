@@ -17,5 +17,5 @@ def test_root_invalid_options(cli_runner):
 
 
 def test_root_with_options(cli_runner):
-    result = cli_runner.invoke(cli, ["--verbose", "--help"])
+    result = cli_runner.invoke(cli, ["--verbose"])
     assert result.exit_code == 0
