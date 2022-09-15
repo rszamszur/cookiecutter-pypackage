@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  # This job checks if an identical workflow is being triggered by different
+  # event and skips it. For instance there is no need to run the same pipeline
+  # twice for pull_request and push for identical commit sha.
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v3.4.1
+        with:
+          skip_after_successful_duplicate: 'true'
+          concurrent_skipping: same_content
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
+  generate:
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+        with:
+          nix_path: nixpkgs=channel:nixos-22.05
+      - name: Generate test project
+        run: nix-shell -p cookiecutter --run "cookiecutter --config-file example-config.yml --no-input ."
+      - name: Set short commit SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+      - name: Push generated test project
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: ./pypackage-example
+          destination-github-username: 'rszamszur'
+          destination-repository-name: 'pypackage-example'
+          user-name: "github-actions[bot]"
+          user-email: github-actions[bot]@users.noreply.github.com
+          commit-message: ${{ format('[skip ci][{0}] Update generated project', env.SHORT_SHA) }}
+          target-branch: master
+  dispatch-remote-workflows:
+    needs: generate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workflow: [ 'main.yml',  'docs.yml']
+
+    steps:
+      - name: Dispatch ${{ matrix.workflow }} workflow
+        uses: codex-/return-dispatch@v1
+        id: return_dispatch
+        with:
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+          repo: pypackage-example
+          owner: rszamszur
+          ref: master
+          workflow: ${{ matrix.workflow }}
+      - name: Await dispatched workflow
+        uses: Codex-/await-remote-run@v1
+        with:
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+          repo: pypackage-example
+          owner: rszamszur
+          run_id: ${{ steps.return_dispatch.outputs.run_id }}
+          run_timeout_seconds: 600
+          poll_interval_ms: 5000
