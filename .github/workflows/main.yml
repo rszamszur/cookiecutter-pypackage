@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'hooks/**'
+      - '{{cookiecutter.folder_name}}/**'
   pull_request:
     branches:
       - master
+    paths:
+      - 'hooks/**'
+      - '{{cookiecutter.folder_name}}/**'
 
 jobs:
   # This job checks if an identical workflow is being triggered by different
