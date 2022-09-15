@@ -15,8 +15,8 @@
 
 For application:
 * Python 3.7 or later installed [How to install python](https://docs.python-guide.org/starting/installation/)
-* Poetry [How to install poetry](https://python-poetry.org/docs/#installation)
-* make (optional)
+* make
+* Poetry (optional) [How to install poetry](https://python-poetry.org/docs/#installation)
 
 ## Installation
 
