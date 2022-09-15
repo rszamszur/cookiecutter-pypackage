@@ -1,7 +1,7 @@
 default_context:
   project_name: "pypackage-example"
   author: "Radosław Szamszur"
-  repo_url: "https://github.com/rszamszur/pypackage-example",
+  repo_url: "https://github.com/rszamszur/pypackage-example"
   email: "github@rsd.sh"
   github_actions: "yes"
   codecov": "yes"
