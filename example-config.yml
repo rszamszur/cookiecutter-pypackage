@@ -1,0 +1,8 @@
+default_context:
+  project_name: "pypackage-example"
+  author: "Radosław Szamszur"
+  email: "github@rsd.sh"
+  github_actions: "yes"
+  codecov": "yes"
+  nix: "yes"
+  license": "MIT"
